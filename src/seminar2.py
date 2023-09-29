@@ -86,6 +86,7 @@ class SoftmaxClassifier:
         loss_history = []
         for it in range(num_iters):
             X_batch, y_batch = None, None
+            
             #########################################################################
             # TODO 3:                                                               #
             # Sample batch_size elements from the training data and their           #
