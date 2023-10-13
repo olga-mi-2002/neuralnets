@@ -83,8 +83,8 @@ class DenseLayer:
     def forward(self, X):
         # TODO: Implement forward pass
         # Your implementation shouldn't have any loops
-        z = X @ self.W.value + self.B.value
         self.X = X.copy()
+        z = X @ self.W.value + self.B.value
         return z
 
     def backward(self, d_out):
@@ -109,11 +109,11 @@ class DenseLayer:
         # raise Exception("Not implemented!")
         # print('d_out shape is ', d_out.shape)
         # print('self.W shape is ', self.W.value.shape)
-        batch_size, n_output = d_out.shape
-        self.W.grad = self.X.T @ d_out
-        self.B.grad = np.ones((1, batch_size)) @ d_out  # (1, batch_size) @ (batch_size, n_out)
-        dL_dX = d_out @ self.W.value.T  # (batch_size, n_out) @ (n_in, n_out) (batch_size, n_input)
-        return dL_dX
+        d_result = np.dot(d_out, self.W.value.T)
+        self.W.grad = np.dot(self.X.T, d_out)
+        self.B.grad = np.sum(d_out, axis=0, keepdims=True)
+
+        return d_result
 
     def params(self):
         return {'W': self.W, 'B': self.B}
