@@ -114,6 +114,7 @@ class DenseLayer:
         self.B.grad = np.sum(d_out, axis=0, keepdims=True)
 
         return d_result
+        # raise Exception("Not implemented!")
 
     def params(self):
         return {'W': self.W, 'B': self.B}
@@ -153,6 +154,7 @@ class TwoLayerNet:
         # Set layer parameters gradient to zeros
         # After that compute loss and gradients
         for layer in self.layers:
+            Z = layer.forward(Z)
             for param in layer.params().values():
                 param.grad = np.zeros_like(param.grad)
 
@@ -171,6 +173,7 @@ class TwoLayerNet:
                 reg_loss, reg_grad = l2_regularization(param.value, self.reg)
                 self.loss += reg_loss
                 param.grad += reg_grad
+
     def fit(self, X, y, learning_rate=1e-3, num_iters=10000,
             batch_size=4, verbose=True):
         """
@@ -214,7 +217,7 @@ class TwoLayerNet:
 
 if __name__ == '__main__':
     """1 point"""
-    # Train your TwoLayer Net! 
+    # Train your TwoLayer Net!
     # Test accuracy must be > 0.33
     # Save report to output/seminar3
     model = TwoLayerNet()
