@@ -111,6 +111,32 @@ def train():
     )
     model.save(PATH_TO_MODEL)
 
+    image_size = (180, 180)
+    batch_size = 128
+
+    train_ds, val_ds = keras.utils.image_dataset_from_directory(
+        "./data/raw/cats_dogs_train/PetImages",
+        validation_split=0.2,
+        subset="both",
+        seed=1337,
+        image_size=image_size,
+        batch_size=batch_size,
+    )
+
+    model = make_model(input_shape=image_size + (3,), num_classes=2)
+    epochs = 1
+    model.compile(
+        optimizer=keras.optimizers.Adam(3e-4),
+        loss=keras.losses.BinaryCrossentropy(from_logits=True),
+        metrics=[keras.metrics.BinaryAccuracy(name="acc")],
+    )
+    model.fit(
+        train_ds,
+        epochs=epochs,
+        validation_data=val_ds,
+    )
+    model.save(PATH_TO_MODEL)
+
 
 def upload():
     """Pipeline: Upload model to S3 storage"""
