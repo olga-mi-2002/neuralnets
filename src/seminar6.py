@@ -7,7 +7,7 @@ from urllib.request import urlretrieve
 import keras
 from keras import layers
 
-import tensorflow as tf
+#import tensorflow as tf
 import boto3
 import dotenv
 
