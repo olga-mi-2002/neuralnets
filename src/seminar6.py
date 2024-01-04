@@ -7,7 +7,7 @@ from urllib.request import urlretrieve
 import keras
 from keras import layers
 
-#import tensorflow as tf
+import tensorflow as tf
 import boto3
 import dotenv
 
@@ -17,7 +17,7 @@ PATH_TO_DATA = 'data/raw/cats_dogs_train'
 PATH_TO_MODEL = 'models/model_6'
 BUCKET_NAME = 'neuralnets2023'
 # todo fix your git user name and copy .env to project root
-YOUR_GIT_USER = 'olga-mi-2002'
+YOUR_GIT_USER = 'olgamironovade'
 
 
 def download_data():
