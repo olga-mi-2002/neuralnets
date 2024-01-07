@@ -12,6 +12,7 @@ import boto3
 import dotenv
 import pandas as pd
 import tensorflow as tf
+import keras
 
 MAX_WORDS = 1000
 MAX_SEQ_LEN = 150
